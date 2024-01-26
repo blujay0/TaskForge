@@ -39,6 +39,9 @@ const taskSchema = new Schema({
   user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
 })
 
+const User = model('User', userSchema);
+const Task = model('Task', taskSchema);
+
 // define route for user auth and CRUD
 
 app.listen(PORT, () => {
