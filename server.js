@@ -12,8 +12,8 @@ app.use(cors());
 const PORT = process.env.PORT || 5000;
 
 // MongoDB connection
-mongoose.connect(process.env.MONGODB_URI, {
-  userNewUrlParser: true,
+mongoose.connect('mongodb+srv://blujay0:youractualpassword@cluster0.fkwvupd.mongodb.net/yourdatabase?retryWrites=true&w=majority', {
+  useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
 });
@@ -43,8 +43,6 @@ const User = model('User', userSchema);
 const Task = model('Task', taskSchema);
 
 // define route for user auth and CRUD
-
-
 app.listen(PORT, () => {
   console.log('Server is running on port ${PORT}');
 })
