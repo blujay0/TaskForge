@@ -25,6 +25,19 @@ db.once('open', () => {
 });
 
 // define MDB schema and models
+const { Schema, model } = mongoose;
+const userSchema = new Schema({
+  username: { type: String, required: true, unique: true },
+  email: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+});
+
+const taskSchema = new Schema({
+  title: { type: String, required: true },
+  description: { type: String },
+  completed: { type: Boolean, default: false },
+  user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+})
 
 // define route for user auth and CRUD
 
