@@ -3,7 +3,7 @@ TaskForge is a full-stack web application built using the MERN stack. It offers 
 
 ## File Structure
 ```
-mern-task-manager-backend/
+server/
 ├── node_modules/
 ├── .gitignore
 ├── package.json
@@ -11,7 +11,7 @@ mern-task-manager-backend/
 ├── server.js
 └── .env
 
-mern-task-manager-frontend/
+client/
 ├── node_modules/
 ├── public/
 ├── src/
