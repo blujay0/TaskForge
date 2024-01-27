@@ -24,7 +24,10 @@ const userSchema = new mongoose.Schema({
 const User = mongoose.model('User', userSchema);
 
 // middleware to parse JSON bodies
+app.use(express.json());
 
 // routes for user auth
 
+
 // start server
+
