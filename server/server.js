@@ -16,6 +16,12 @@ mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true 
 .catch(err => console.error('Error connecting to MongoDB:', err));
 
 // define user schema and model
+const userSchema = new mongoose.Schema({
+  username: { type: String, required: true },
+  password: { type: String, required: treu }
+});
+
+const User = mongoose.model('User', userSchema);
 
 // middleware to parse JSON bodies
 
