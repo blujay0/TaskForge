@@ -3,77 +3,76 @@ import { getTasks, createTask, updateTask, deleteTask } from '../services/api';
 
 const TaskManager = () => {
   const [tasks, setTasks] = useState([]);
-  const [newTaskName, setNewTaskName] = useState('');
+  const [authenticated, setAuthenticated] = useState(false); // Track user authentication status
 
   useEffect(() => {
-    // fetch tasks from the server when the component mounts
+    // Fetch tasks from the server when the component mounts
+    const fetchTasks = async () => {
+      try {
+        const tasksData = await getTasks();
+        setTasks(tasksData);
+      } catch (error) {
+        console.error('Error fetching tasks:', error);
+      }
+    };
+
     fetchTasks();
   }, []);
 
-  const fetchTasks = async () => {
+  const handleDeleteTask = async (taskId) => {
     try {
-      const response = await getTasks();
-      setTasks(response.data);
-    } catch (error) {
-      console.error('Error fetching tasks:', error);
-    }
-  };
-
-  const handleCreateTask = async () => {
-    try {
-      const response = await createTask({ name: newTaskName });
-      setTasks([...tasks, response.data]);
-      setNewTaskName('');
-    } catch (error) {
-      console.error('Error creating task:', error);
-    }
-  };
-
-  const handleUpdateTask = async (id, newName) => {
-    try {
-      await updateTask(id, { name: newName });
-      const updatedTasks = tasks.map(task =>
-        task._id === id ? { ...task, name: newName } : task
-      );
+      await deleteTask(taskId);
+      // After deleting the task, update the task list by fetching tasks again
+      const updatedTasks = await getTasks();
       setTasks(updatedTasks);
-    } catch (error) {
-      console.error('Error updating task:', error);
-    }
-  };
-
-  const handleDeleteTask = async id => {
-    try {
-      await deleteTask(id);
-      const filteredTasks = tasks.filter(task => task._id !== id);
-      setTasks(filteredTasks);
     } catch (error) {
       console.error('Error deleting task:', error);
     }
   };
 
+  const handleLogin = () => {
+    // Simulate login by setting the authenticated state to true
+    setAuthenticated(true);
+  };
+
+  const handleLogout = () => {
+    // Simulate logout by setting the authenticated state to false
+    setAuthenticated(false);
+  };
+
   return (
     <div>
-      <h2>Task Manager</h2>
-      <div>
-        <input
-          type="text"
-          value={newTaskName}
-          onChange={e => setNewTaskName(e.target.value)}
-        />
-        <button onClick={handleCreateTask}>Add Task</button>
-      </div>
+      <h1>Task Manager</h1>
+      {authenticated && (
+        <div>
+          {/* Add Task UI */}
+          <h2>Add Task</h2>
+          {/* Add Task Form or Button */}
+        </div>
+      )}
       <ul>
-        {tasks.map(task => (
-          <li key={task._id}>
-            <input
-              type="text"
-              value={task.name}
-              onChange={e => handleUpdateTask(task._id, e.target.value)}
-            />
-            <button onClick={() => handleDeleteTask(task._id)}>Delete</button>
+        {tasks.map((task) => (
+          <li key={task.id}>
+            <h3>{task.title}</h3>
+            <p>{task.description}</p>
+            <p>Due Date: {task.dueDate}</p>
+            <p>Status: {task.completed ? 'Completed' : 'Pending'}</p>
+            <button onClick={() => handleDeleteTask(task.id)}>Delete</button>
           </li>
         ))}
       </ul>
+      {!authenticated && (
+        <div>
+          {/* Login UI */}
+          <button onClick={handleLogin}>Login</button>
+        </div>
+      )}
+      {authenticated && (
+        <div>
+          {/* Logout UI */}
+          <button onClick={handleLogout}>Logout</button>
+        </div>
+      )}
     </div>
   );
 };

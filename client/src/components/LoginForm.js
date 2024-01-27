@@ -1,43 +1,33 @@
 import React, { useState } from 'react';
-import { loginUser } from '../services/api';
 
-const LoginForm = () => {
+const LoginForm = ({ setAuthenticated }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const handleLogin = async () => {
-    try {
-      const response = await loginUser(username, password);
-      console.log(response.data.token);
-    } catch (error) {
-      console.error('Login failed:', error.response.data.message);
-    }
+    // Perform login logic, e.g., sending credentials to server for authentication
+    // If login is successful, update the authenticated state
+    setAuthenticated(true);
   };
 
   return (
     <div>
       <h2>Login</h2>
       <form onSubmit={handleLogin}>
-        <div>
-          <label>Username:</label>
-          <input 
-            type="text"
-            value={username}
-            onChange={e => setUsername(e.target.value)}
-          />
-        </div>
-        <div>
-          <label>Password:</label>
-          <input
-            type="password"
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-          />
-        </div>
+        <label>
+          Username:
+          <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+        </label>
+        <br />
+        <label>
+          Password:
+          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+        </label>
+        <br />
         <button type="submit">Login</button>
       </form>
     </div>
-  )
-}
+  );
+};
 
 export default LoginForm;
