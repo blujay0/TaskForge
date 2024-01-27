@@ -18,7 +18,7 @@ mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true 
 // define user schema and model
 const userSchema = new mongoose.Schema({
   username: { type: String, required: true },
-  password: { type: String, required: treu }
+  password: { type: String, required: true }
 });
 
 const User = mongoose.model('User', userSchema);
