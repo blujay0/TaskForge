@@ -5,6 +5,15 @@ const LoginForm = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
+  const handleLogin = async () => {
+    try {
+      const response = await loginUser(username, password);
+      console.log(response.data.token);
+    } catch (error) {
+      console.error('Login failed:', error.response.data.message);
+    }
+  };
+
   return (
     <div>
       <h2>Login</h2>
