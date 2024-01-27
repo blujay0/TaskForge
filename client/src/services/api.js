@@ -32,7 +32,6 @@ export const updateTask = async (taskId, taskData) => {
   }
 };
 
-
 export const deleteTask = async (taskId) => {
   try {
     const response = await api.delete(`/tasks/${taskId}`);
@@ -41,3 +40,20 @@ export const deleteTask = async (taskId) => {
     throw new Error('Error deleting task:', error);
   }
 };
+
+export const loginUser = async (username, password) => {
+  try {
+    const response = await api.post('/login', { username, password });
+    return response.data;
+  } catch (error) {
+    throw new Error('Error logging in:', error);
+  }
+};
+
+export const registerUser = async (username, password) => {
+  try {
+    const response = await api.post('/register', { username, password });
+    return response.data;
+  } catch (error) {
+    throw new Error('Error registering user:', error);
+  }
