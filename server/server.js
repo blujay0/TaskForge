@@ -27,7 +27,29 @@ const User = mongoose.model('User', userSchema);
 app.use(express.json());
 
 // routes for user auth
+app.post('/api/register', async (req, res) => {
+  const { username, password } = req.body;
+  const hashedPassword = await bcrypt.hash(password, 10);
+  const user = new User({ username, password: hashedPassword });
+  await user.save();
+  res.status(201).json({ message: 'User registered successfully' });
+});
 
+app.post('/api/login', async (req, res) => {
+  const { username, password } = req.body;
+  const user = await User.findOne({ username });
+  if (!user) {
+    return res.status(401).json({ message: 'Invalid username or password' });
+  }
+  const passwordMatch = await bcrypt.compare(password, user.password);
+  if (!passwordMatch) {
+    return res.status(401).json({ message: 'Invalid username or password' });
+  }
+  const token = jwt.sign({ username: user.username }, JWT_SECRET);
+  res.json({ token });
+});
 
 // start server
-
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
