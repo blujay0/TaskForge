@@ -22,7 +22,7 @@ const App = () => {
   return (
     <div>
       <h1>Task Manager</h1>
-      {!authenticated && showLoginForm && <LoginForm onLogin={handleLogin} />}
+      {!authenticated && showLoginForm && <LoginForm onLogin={handleLogin} setAuthenticated={setAuthenticated} />}
       {!authenticated && !showLoginForm && <RegisterForm onRegister={handleRegister} />}
       {authenticated && <TaskManager />}
       <button onClick={toggleForm}>Switch Form</button> {/* button to switch between login and register forms */}

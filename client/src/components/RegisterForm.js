@@ -10,7 +10,11 @@ const RegisterForm = () => {
       await registerUser(username, password);
       console.log('User registered successfully');
     } catch (error) {
-      console.error('Registration failed:', error.response.data.message);
+      if (error.response && error.response.data) {
+        console.error('Registration failed:', error.response.data.message);
+      } else {
+        console.error('Registration failed:', error.message);
+      }
     }
   };
 
