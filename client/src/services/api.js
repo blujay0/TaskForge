@@ -5,10 +5,39 @@ const api = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
 });
 
-export const registerUser = async (username, password) => {
-  return api.post('/register', { username, password });
+export const getTasks = async () => {
+  try {
+    const response = await api.get('/tasks');
+    return response.data;
+  } catch (error) {
+    throw new Error('Error fetching tasks:', error);
+  }
 };
 
-export const loginUser = async (username, password) => {
-  return api.post('/login', { username, password });
+export const createTask = async (taskData) => {
+  try {
+    const response = await api.post('/tasks', taskData);
+    return response.data;
+  } catch (error) {
+    throw new Error('Error creating task:', error);
+  }
+};
+
+export const updateTask = async (taskId, taskData) => {
+  try {
+    const response = await api.put(`/tasks/${taskId}`, taskData);
+    return response.data;
+  } catch (error) {
+    throw new Error('Error updating task:', error);
+  }
+};
+
+
+export const deleteTask = async (taskId) => {
+  try {
+    const response = await api.delete(`/tasks/${taskId}`);
+    return response.data;
+  } catch (error) {
+    throw new Error('Error deleting task:', error);
+  }
 };
