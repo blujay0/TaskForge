@@ -3,30 +3,37 @@ TaskForge is a full-stack web application built using the MERN stack. It offers 
 
 ## File Structure
 ```
-server/
-├── node_modules/
-├── .env
+task-manager-app/
+├── client/
+│   ├── public/
+│   │   └── index.html
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── LandingPage.js
+│   │   │   ├── LoginPage.js
+│   │   │   ├── RegisterPage.js
+│   │   │   └── TaskManager.js
+│   │   ├── App.js
+│   │   ├── index.js
+│   │   └── ...
+│   ├── package.json
+│   └── ...
+├── server/
+│   ├── controllers/
+│   │   ├── authController.js
+│   │   └── taskController.js
+│   ├── models/
+│   │   ├── User.js
+│   │   └── Task.js
+│   ├── routes/
+│   │   ├── authRoutes.js
+│   │   └── taskRoutes.js
+│   ├── utils/
+│   │   └── authMiddleware.js
+│   ├── server.js
+│   ├── package.json
+│   └── ...
 ├── .gitignore
-├── package.json
-├── server.js
-└── models/
-    └── user.js
-
-client/
-├── node_modules/
-├── public/
-├── src/
-│   ├── components/
-│   │   ├── LoginForm.js
-│   │   ├── RegisterForm.js
-│   │   └── TaskManager.js
-│   ├── services/
-│   │   └── api.js
-│   ├── App.js
-│   ├── index.js
-│   └── index.css
 ├── .env
-├── .gitignore
-├── package.json
-└── package-lock.json
+└── package.json
 ```
