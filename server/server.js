@@ -12,7 +12,7 @@ app.use(cors());
 const PORT = process.env.PORT || 5000;
 
 // MongoDB connection
-mongoose.connect('mongodb+srv://blujay0:youractualpassword@cluster0.fkwvupd.mongodb.net/yourdatabase?retryWrites=true&w=majority', {
+mongoose.connect('mongodb+srv://blujay0:RBGz53Oayar1NIp5@cluster0.fkwvupd.mongodb.net/yourdatabase?retryWrites=true&w=majority', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
