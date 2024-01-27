@@ -5,8 +5,15 @@ const RegisterForm = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
+  const handleRegister = async () => {
+    try {
+      await registerUser(username, password);
+      console.log('User registered successfully');
+    } catch (error) {
+      console.error('Registration failed:', error.response.data.message);
+    }
+  };
 
-  
   return (
     <div>
       <h2>Register</h2>
