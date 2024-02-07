@@ -19,7 +19,7 @@ const fetchNote = async (req, res) => {
   res.json({note: note})
 }
 
-const createNote = async(req, res) {
+const createNote = async(req, res) => {
   async (req, res) => {
     // get sent in data off req body
     const title = req.body.title;
