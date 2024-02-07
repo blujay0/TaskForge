@@ -1,3 +1,6 @@
+// import Note model since used in this file
+const Note = require('../models/note');
+
 const fetchNotes = async(req, res) => {
   // find the notes
   const notes = await Note.find();
@@ -65,3 +68,11 @@ const deleteNote = async(req, res) => {
   res.json({success: "Record deleted"});
 };
 
+// export module
+module.exports = {
+  fetchNotes: fetchNotes,
+  fetchNote: fetchNote,
+  createNote: createNote,
+  updateNote: updateNote,
+  deleteNote: deleteNote,
+};
